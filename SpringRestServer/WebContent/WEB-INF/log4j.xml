@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+        <Property name="logPath">logsDir</Property>
+        <Property name="rollingFileName">test</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+             <PatternLayout pattern="%d{dd/MM/yyyy HH:mm:ss.SSS} - [%p] - [%t] %C{1}.%M:%L - %msg%n"/>
+        </Console>
+        <RollingFile name="rollingFile" fileName="${logPath}/${rollingFileName}.log" filePattern="${logPath}/${rollingFileName}_%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{dd/MM/yyyy HH:mm:ss.SSS} - [%p] - [%t] %C{1}.%M:%L- - %msg%n"/>
+			 <Policies>
+				<SizeBasedTriggeringPolicy size="1MB" />
+			</Policies>
+    		<DefaultRolloverStrategy max="5" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="rollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>
